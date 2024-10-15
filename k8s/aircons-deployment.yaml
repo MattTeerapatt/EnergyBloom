@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aircons-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aircons
+  template:
+    metadata:
+      labels:
+        app: aircons
+    spec:
+      containers:
+      - name: aircons
+        image: aircons-service:latest
+        ports:
+        - containerPort: 3001

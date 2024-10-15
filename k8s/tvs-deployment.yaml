@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tvs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tvs
+  template:
+    metadata:
+      labels:
+        app: tvs
+    spec:
+      containers:
+      - name: tvs
+        image: tvs-service:latest
+        ports:
+        - containerPort: 3007

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lights-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lights
+  template:
+    metadata:
+      labels:
+        app: lights
+    spec:
+      containers:
+      - name: lights
+        image: lights-service:latest
+        ports:
+        - containerPort: 3006

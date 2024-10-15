@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "billings",
+    "password": "password",
+    "database": "billings_db",
+    "host": "billings-db",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "billings",
+    "password": "password",
+    "database": "billings_db",
+    "host": "billings-db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "billings",
+    "password": "password",
+    "database": "billings_db",
+    "host": "billings-db",
+    "dialect": "postgres"
+  }
+}

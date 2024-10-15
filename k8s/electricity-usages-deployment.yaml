@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: electricity-usages-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: electricity-usages
+  template:
+    metadata:
+      labels:
+        app: electricity-usages
+    spec:
+      containers:
+      - name: electricity-usages
+        image: electricity-usages-service:latest
+        ports:
+        - containerPort: 3003

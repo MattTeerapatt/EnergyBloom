@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "lights",
+    "password": "password",
+    "database": "lights_db",
+    "host": "lights-db",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "lights",
+    "password": "password",
+    "database": "lights_db",
+    "host": "lights-db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "lights",
+    "password": "password",
+    "database": "lights_db",
+    "host": "lights-db",
+    "dialect": "postgres"
+  }
+}

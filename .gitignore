@@ -1,0 +1,45 @@
+# Node modules
+frontend/node_modules/
+backend/aircons/node_modules/
+backend/billings/node_modules/
+backend/electricity-usages/node_modules/
+backend/fridges/node_modules/
+backend/lights/node_modules/
+backend/tvs/node_modules/
+backend/users/node_modules/
+
+# Next.js build artifacts
+frontend/.next/
+
+# Build output
+frontend/build/
+backend/aircons/build/
+backend/billings/build/
+backend/electricity-usages/build/
+backend/fridges/build/
+backend/lights/build/
+backend/tvs/build/
+backend/users/build/
+
+# Testing
+frontend/coverage
+frontend/out/
+
+# Miscellaneous
+frontend/.DS_Store
+frontend/*.pem
+
+# Debug logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Vercel
+frontend/.vercel
+
+# TypeScript build info
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+
+.env

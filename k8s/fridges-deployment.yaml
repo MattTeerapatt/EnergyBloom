@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fridges-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fridges
+  template:
+    metadata:
+      labels:
+        app: fridges
+    spec:
+      containers:
+      - name: fridges
+        image: fridges-service:latest
+        ports:
+        - containerPort: 3005

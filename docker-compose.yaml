@@ -1,0 +1,183 @@
+  services:
+    aircons-db:
+      image: postgres:13
+      container_name: postgres-aircons-db
+      restart: always
+      environment:
+        POSTGRES_USER: aircons
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: aircons_db
+      volumes:
+        - postgres-aircons-data:/var/lib/postgresql/data
+      ports:
+        - "5433:5432"
+      networks:
+        - app-network
+
+    billings-db:
+      image: postgres:13
+      container_name: postgres-billings-db
+      restart: always
+      environment:
+        POSTGRES_USER: billings
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: billings_db
+      volumes:
+        - postgres-billings-data:/var/lib/postgresql/data
+      ports:
+        - "5434:5432"
+      networks:
+        - app-network
+
+    usages-db:
+      image: postgres:13
+      container_name: postgres-usages-db
+      restart: always
+      environment:
+        POSTGRES_USER: usages
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: usages_db
+      volumes:
+        - postgres-usages-data:/var/lib/postgresql/data
+      ports:
+        - "5435:5432"
+      networks:
+        - app-network
+
+    lights-db:
+      image: postgres:13
+      container_name: postgres-lights-db
+      restart: always
+      environment:
+        POSTGRES_USER: lights
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: lights_db
+      volumes:
+        - postgres-lights-data:/var/lib/postgresql/data
+      ports:
+        - "5436:5432"
+      networks:
+        - app-network
+
+    users-db:
+      image: postgres:13
+      container_name: postgres-users-db
+      restart: always
+      environment:
+        POSTGRES_USER: users
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: users_db
+      volumes:
+        - postgres-users-data:/var/lib/postgresql/data
+      ports:
+        - "5439:5432"
+      networks:
+        - app-network
+
+    
+
+    
+    # frontend:
+    #   build: 
+    #     context: ./frontend
+    #     dockerfile: Dockerfile
+    #   ports:
+    #     - "3000:3000"
+
+    aircons:
+      build: 
+        context: ./backend/aircons
+        dockerfile: Dockerfile
+      ports:
+        - "3001:3001"
+      command: >
+        sh -c "until pg_isready -h aircons-db -U aircons; do sleep 2; done; 
+        npx sequelize-cli db:migrate; 
+        ./node_modules/.bin/ts-node src/index.ts"
+      environment:
+        DATABASE_URL: postgres://aircons:password@aircons-db:5432/aircons_db
+      depends_on:
+        - aircons-db
+      networks:
+        - app-network
+
+    billings:
+      build: 
+        context: ./backend/billings
+        dockerfile: Dockerfile
+      ports:
+        - "3002:3002"
+      command: >
+        sh -c "until pg_isready -h billings-db -U billings; do sleep 2; done; 
+        npx sequelize-cli db:migrate; 
+        ./node_modules/.bin/ts-node src/index.ts"
+      environment:
+        DATABASE_URL: postgres://billings:password@billings-db:5432/billings_db
+      depends_on:
+        - billings-db
+      networks:
+        - app-network
+
+    electricity-usages:
+      build: 
+        context: ./backend/electricity-usages
+        dockerfile: Dockerfile
+      ports:
+        - "3003:3003"
+      command: >
+        sh -c "until pg_isready -h usages-db -U usages; do sleep 2; done; 
+        npx sequelize-cli db:migrate; 
+        ./node_modules/.bin/ts-node src/index.ts"
+      environment:
+        DATABASE_URL: postgres://usages:password@usages-db:5432/usages_db
+      depends_on:
+        - usages-db
+      networks:
+        - app-network
+
+    lights:
+      build: 
+        context: ./backend/lights
+        dockerfile: Dockerfile
+      ports:
+        - "3004:3004"
+      command: >
+        sh -c "until pg_isready -h lights-db -U lights; do sleep 2; done; 
+        npx sequelize-cli db:migrate; 
+        ./node_modules/.bin/ts-node src/index.ts"
+      environment:
+        DATABASE_URL: postgres://lights:password@lights-db:5432/lights_db
+      depends_on:
+        - lights-db
+      networks:
+        - app-network
+
+    users:
+      build: 
+        context: ./backend/users
+      ports:
+        - "3007:3007"
+      command: >
+        sh -c "until pg_isready -h users-db -U users; do sleep 2; done; 
+        npx sequelize-cli db:migrate; 
+        ./node_modules/.bin/ts-node src/index.ts"
+      environment:
+        DATABASE_URL: postgres://users:password@users-db:5432/users_db
+      depends_on:
+        - users-db
+      networks:
+        - app-network
+
+  networks:
+    app-network:
+      driver: bridge
+
+  volumes:
+    postgres-aircons-data:
+    postgres-billings-data:
+    postgres-users-data:
+    postgres-lights-data:
+    postgres-usages-data:
+
+
+  # postgres://<username>:<password>@<host>:<port>/<database>

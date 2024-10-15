@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: billings-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: billings
+  template:
+    metadata:
+      labels:
+        app: billings
+    spec:
+      containers:
+      - name: billings
+        image: billings-service:latest
+        ports:
+        - containerPort: 3002

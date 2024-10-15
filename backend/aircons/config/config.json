@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "aircons",
+    "password": "password",
+    "database": "aircons_db",
+    "host": "aircons-db",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "aircons",
+    "password": "password",
+    "database": "aircons_db",
+    "host": "aircons-db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "aircons",
+    "password": "password",
+    "database": "aircons_db",
+    "host": "aircons-db",
+    "dialect": "postgres"
+  }
+}

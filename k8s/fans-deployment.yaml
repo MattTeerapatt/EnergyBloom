@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fans-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fans
+  template:
+    metadata:
+      labels:
+        app: fans
+    spec:
+      containers:
+      - name: fans
+        image: fans-service:latest
+        ports:
+        - containerPort: 3004
